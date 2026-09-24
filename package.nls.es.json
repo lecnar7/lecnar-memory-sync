@@ -1,0 +1,11 @@
+{
+  "lecnar.description": "Guarda tu sesión de VS Code automáticamente y ofrece un botón de Restaurar tras un cierre brusco: pestañas, cursor, Faro Mental y páginas web.",
+  "lecnar.command.freeze": "Lecnar: Guardar sesión ahora",
+  "lecnar.command.restore": "Lecnar: Restaurar sesión (Faro Mental)",
+  "lecnar.command.discard": "Lecnar: Descartar sesión guardada",
+  "lecnar.command.addWebPage": "Lecnar: Agregar página web al contexto",
+  "lecnar.command.clearBeacon": "Lecnar: Apagar Faro Mental",
+  "lecnar.config.beaconDuration": "Segundos que permanece encendido el Faro Mental.",
+  "lecnar.config.autosaveDelay": "Segundos de espera tras un cambio antes de guardar la sesión automáticamente.",
+  "lecnar.config.enableVoice": "Leer en voz alta un resumen (Audio Briefing) al restaurar la sesión. Solo funciona en macOS."
+}

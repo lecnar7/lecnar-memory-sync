@@ -1,0 +1,11 @@
+{
+  "lecnar.description": "Automatically saves your VS Code session and offers a Restore button after a crash or shutdown: tabs, cursor position, Mental Beacon and reference web pages.",
+  "lecnar.command.freeze": "Lecnar: Save Session Now",
+  "lecnar.command.restore": "Lecnar: Restore Session (Mental Beacon)",
+  "lecnar.command.discard": "Lecnar: Discard Saved Session",
+  "lecnar.command.addWebPage": "Lecnar: Add Web Page to Context",
+  "lecnar.command.clearBeacon": "Lecnar: Turn Off Mental Beacon",
+  "lecnar.config.beaconDuration": "Seconds the Mental Beacon stays lit.",
+  "lecnar.config.autosaveDelay": "Seconds to wait after a change before auto-saving the session.",
+  "lecnar.config.enableVoice": "Read a spoken summary (Audio Briefing) aloud when restoring the session. macOS only."
+}

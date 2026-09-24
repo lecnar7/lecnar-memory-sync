@@ -1,0 +1,14 @@
+{
+  "Lecnar: session saved ({0} files, {1} web pages).": "Lecnar: session saved ({0} files, {1} web pages).",
+  "Lecnar: nothing to save (open a folder and a file first).": "Lecnar: nothing to save (open a folder and a file first).",
+  "Lecnar: no saved session for this project.": "Lecnar: no saved session for this project.",
+  "Lecnar: couldn't open the file from the last edit.": "Lecnar: couldn't open the file from the last edit.",
+  "URL of the page you want to save to your context": "URL of the page you want to save to your context",
+  "Must start with http:// or https://": "Must start with http:// or https://",
+  "Restore session": "Restore session",
+  "Lecnar: reopen your last session's tabs": "Lecnar: reopen your last session's tabs",
+  "Lecnar: found your previous session ({0} files, saved {1}).": "Lecnar: found your previous session ({0} files, saved {1}).",
+  "Restore": "Restore",
+  "Discard": "Discard",
+  "Lecnar: could not play the audio summary.": "Lecnar: could not play the audio summary."
+}

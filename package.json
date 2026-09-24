@@ -1,0 +1,94 @@
+{
+  "name": "lecnar-memory-sync",
+  "displayName": "Lecnar Memory Sync",
+  "description": "%lecnar.description%",
+  "icon": "icon.png",
+  "sponsor": {
+    "url": "https://ko-fi.com/lecnar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lecnar7/lecnar-memory-sync"
+  },
+  "version": "0.1.2",
+  "publisher": "lecnar",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "session",
+    "restore",
+    "tabs",
+    "workspace",
+    "autosave",
+    "context",
+    "crash recovery",
+    "sesión",
+    "restaurar"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "lecnar.freeze",
+        "title": "%lecnar.command.freeze%"
+      },
+      {
+        "command": "lecnar.restore",
+        "title": "%lecnar.command.restore%"
+      },
+      {
+        "command": "lecnar.discard",
+        "title": "%lecnar.command.discard%"
+      },
+      {
+        "command": "lecnar.addWebPage",
+        "title": "%lecnar.command.addWebPage%"
+      },
+      {
+        "command": "lecnar.clearBeacon",
+        "title": "%lecnar.command.clearBeacon%"
+      }
+    ],
+    "configuration": {
+      "title": "Lecnar Memory Sync",
+      "properties": {
+        "lecnar.beaconDurationSeconds": {
+          "type": "number",
+          "default": 8,
+          "description": "%lecnar.config.beaconDuration%"
+        },
+        "lecnar.autosaveDelaySeconds": {
+          "type": "number",
+          "default": 2,
+          "description": "%lecnar.config.autosaveDelay%"
+        },
+        "lecnar.enableVoiceBriefing": {
+          "type": "boolean",
+          "default": true,
+          "description": "%lecnar.config.enableVoice%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "bundle": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.9.2",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.4.0"
+  },
+  "l10n": "./l10n"
+}
