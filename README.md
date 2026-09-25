@@ -8,7 +8,7 @@ y te ofrece un botón de **Restaurar** cuando vuelves después de un cierre
 brusco, un apagón o un simple descanso — igual que el botón de "Restaurar
 páginas" de tu navegador.
 
-[![Mira el video de Lecnar Memory Sync](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/portada-video.jpg)](https://youtu.be/lIimu4fBO9M)
+[![Mira el video de Lecnar Memory Sync](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/portada-video.jpg)](https://youtu.be/QVZ9QrwTms0)
 
 [![Apóyame en Ko-fi](https://img.shields.io/badge/Ko--fi-Ap%C3%B3yame-F5B642?logo=ko-fi&logoColor=white)](https://ko-fi.com/lecnar)
 
@@ -73,4 +73,4 @@ en **[ko-fi.com/lecnar](https://ko-fi.com/lecnar)** — me ayuda a seguir mejor�
 
 ---
 
-*Creada por Lecnar · [Código en GitHub](https://github.com/lecnar7/lecnar-memory-sync) · [Video en YouTube](https://youtu.be/lIimu4fBO9M)*
+*Creada por Lecnar · [Código en GitHub](https://github.com/lecnar7/lecnar-memory-sync) · [Video en YouTube](https://youtu.be/QVZ9QrwTms0)*
