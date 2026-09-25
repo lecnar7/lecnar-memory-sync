@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 
 // ---------- Modelo de datos ----------
 
@@ -119,7 +119,8 @@ const SAY_VOICE: Record<Lang, string> = {
 // eso requeriría mandar el contexto a un modelo de IA (versión futura).
 
 function fileLabel(path: string): string {
-  const name = path.split('/').pop() ?? path;
+  // Acepta rutas con / (Mac/Linux) y con \ (Windows)
+  const name = path.split(/[\\/]/).pop() ?? path;
   return name;
 }
 
@@ -195,11 +196,13 @@ function speakBriefing(snapshot: Snapshot) {
   }
   const lang = getLang();
   const text = buildBriefingText(snapshot, lang);
-  const safe = text.replace(/"/g, "'"); // evita romper el comando por comillas dobles
-  exec(`say -v "${SAY_VOICE[lang]}" "${safe}"`, (error: Error | null) => {
+  // SEGURIDAD: se usa execFile (no exec). El texto se pasa como un argumento
+  // aparte y NUNCA pasa por la terminal, así que un nombre de archivo con
+  // símbolos raros como $(...) o `...` se lee como texto normal, nunca como una orden.
+  execFile('say', ['-v', SAY_VOICE[lang], text], (error: Error | null) => {
     if (error) {
       // Si la voz elegida no está instalada, se reintenta con la voz por defecto del sistema
-      exec(`say "${safe}"`, (fallbackError: Error | null) => {
+      execFile('say', [text], (fallbackError: Error | null) => {
         if (fallbackError) {
           vscode.window.showWarningMessage(vscode.l10n.t('Lecnar: could not play the audio summary.'));
         }
@@ -210,8 +213,41 @@ function speakBriefing(snapshot: Snapshot) {
 
 // ---------- Almacenamiento ----------
 
+// Pequeño "hash" de un texto, para distinguir carpetas que se llaman igual
+function shortHash(text: string): string {
+  let h = 5381;
+  for (let i = 0; i < text.length; i++) {
+    h = ((h << 5) + h + text.charCodeAt(i)) >>> 0;
+  }
+  return h.toString(36);
+}
+
+// Identifica el proyecto por su nombre + su ubicación en el disco.
+// Así dos carpetas llamadas igual (ej. dos "app") ya no se mezclan.
 function workspaceKey(): string | undefined {
-  return vscode.workspace.workspaceFolders?.[0]?.name;
+  const folder = vscode.workspace.workspaceFolders?.[0];
+  if (!folder) {
+    return undefined;
+  }
+  return `${folder.name}#${shortHash(folder.uri.toString())}`;
+}
+
+// Las versiones 0.1.x anteriores guardaban usando solo el nombre de la carpeta.
+// Esto mueve esas sesiones al nuevo formato para que nadie pierda lo guardado.
+async function migrateLegacyKeys(ctx: vscode.ExtensionContext) {
+  const folder = vscode.workspace.workspaceFolders?.[0];
+  const key = workspaceKey();
+  if (!folder || !key) {
+    return;
+  }
+  for (const storeKey of [LIVE_KEY, RECOVERY_KEY]) {
+    const map = loadMap(ctx, storeKey);
+    if (map[folder.name] && !map[key]) {
+      map[key] = map[folder.name];
+      delete map[folder.name];
+      await ctx.globalState.update(storeKey, map);
+    }
+  }
 }
 
 function loadMap(ctx: vscode.ExtensionContext, storeKey: string): Record<string, Snapshot> {
@@ -428,12 +464,14 @@ export async function activate(ctx: vscode.ExtensionContext) {
   statusItem.command = 'lecnar.restore';
   ctx.subscriptions.push(statusItem);
 
-  // Si hay una sesión anterior y aún no se ha resuelto ninguna, se guarda como "recuperable"
+  await migrateLegacyKeys(ctx);
+
+  // Al abrir el proyecto, la ÚLTIMA sesión guardada pasa a ser la "recuperable".
+  // (Antes, si ignorabas el aviso, se quedaba pegada una sesión vieja para siempre.)
   const key = workspaceKey();
   if (key) {
-    const hasRecovery = !!loadMap(ctx, RECOVERY_KEY)[key];
     const live = loadMap(ctx, LIVE_KEY)[key];
-    if (!hasRecovery && live) {
+    if (live) {
       await putSnapshot(ctx, RECOVERY_KEY, live);
     }
   }
@@ -485,20 +523,24 @@ export async function activate(ctx: vscode.ExtensionContext) {
       const saved = new Date(recovery.savedAt).toLocaleString();
       const restoreLabel = vscode.l10n.t('Restore');
       const discardLabel = vscode.l10n.t('Discard');
-      const choice = await vscode.window.showInformationMessage(
-        vscode.l10n.t(
-          'Lecnar: found your previous session ({0} files, saved {1}).',
-          recovery.files.length,
-          saved
-        ),
-        restoreLabel,
-        discardLabel
-      );
-      if (choice === restoreLabel) {
-        await restore(ctx);
-      } else if (choice === discardLabel) {
-        await discard(ctx);
-      }
+      // Sin "await": la extensión termina de arrancar aunque el aviso siga abierto
+      void vscode.window
+        .showInformationMessage(
+          vscode.l10n.t(
+            'Lecnar: found your previous session ({0} files, saved {1}).',
+            recovery.files.length,
+            saved
+          ),
+          restoreLabel,
+          discardLabel
+        )
+        .then(async (choice: string | undefined) => {
+          if (choice === restoreLabel) {
+            await restore(ctx);
+          } else if (choice === discardLabel) {
+            await discard(ctx);
+          }
+        });
     }
   }
 }

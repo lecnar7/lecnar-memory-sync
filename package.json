@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/lecnar7/lecnar-memory-sync"
   },
-  "version": "0.1.2",
+  "version": "0.1.4",
   "publisher": "lecnar",
   "engines": {
     "vscode": "^1.85.0"
@@ -84,7 +84,7 @@
     "bundle": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@types/node": "^20.19.43",
     "@types/vscode": "^1.85.0",
     "@vscode/vsce": "^3.9.2",
     "esbuild": "^0.24.0",
