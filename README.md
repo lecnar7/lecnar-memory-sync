@@ -1,76 +1,84 @@
 # Lecnar Memory Sync
 
-> No recuerdes dónde te quedaste. Deja que tu editor lo haga por ti.
-> *Don't remember where you left off. Let your editor do it for you.*
+> Don't remember where you left off. Let your editor do it for you.
 
-**Lecnar Memory Sync** guarda tu sesión de trabajo en VS Code automáticamente
-y te ofrece un botón de **Restaurar** cuando vuelves después de un cierre
-brusco, un apagón o un simple descanso — igual que el botón de "Restaurar
-páginas" de tu navegador.
+🇪🇸 [Leer en español](https://github.com/lecnar7/lecnar-memory-sync/blob/main/README.es.md)
 
-[![Mira el video de Lecnar Memory Sync](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/portada-video.jpg)](https://youtu.be/QVZ9QrwTms0)
+**VS Code restores your files. Lecnar Memory Sync restores *where you were*:** the exact line you were editing, a heatmap of where you worked, and the reference pages you had open.
 
-[![Apóyame en Ko-fi](https://img.shields.io/badge/Ko--fi-Ap%C3%B3yame-F5B642?logo=ko-fi&logoColor=white)](https://ko-fi.com/lecnar)
+It saves your session automatically in the background. After a crash, a power outage or just a long break, you get a **Restore** button — like "Restore pages" in your browser.
 
-## ✨ Funciones
+<!-- TODO: add the GIF here (crash → reopen → Restore → Mental Beacon), e.g.:
+![Lecnar Memory Sync demo](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/demo.gif)
+-->
 
-- 🔄 **Guardado automático** — cada vez que cambias de pestaña, editas o
-  mueves el cursor, tu sesión se guarda sola en segundo plano.
+[![Watch the Lecnar Memory Sync video](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/portada-video.jpg)](https://youtu.be/QVZ9QrwTms0)
 
-![Guardado automático](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/1-guardado-automatico.png)
+## Why I built it
 
-- ⏪ **Botón Restaurar** — si VS Code se cierra de golpe, al volver te aparece
-  un aviso para recuperar todo con un solo clic.
+I live in the Dominican Republic, where the power goes out more often than I'd like. VS Code always brought my files back, but I kept losing my train of thought: which line I was on, which docs I was reading, what I was in the middle of. Lecnar Memory Sync fixes that.
 
-![Botón Restaurar](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/2-restaurar.png)
+## ✨ Features
 
-- 🟠 **Faro Mental** — al restaurar, tu editor te lleva directo a la última
-  línea que editaste y pinta un mapa de calor suave sobre las líneas donde
-  trabajaste más.
+- 🔄 **Automatic saving** — every time you switch tabs, edit or move the cursor, your session is saved quietly in the background. Nothing to remember.
 
-![Faro Mental](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/3-faro-mental.png)
+![Automatic saving](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/1-guardado-automatico.png)
 
-- 🌐 **Páginas de referencia** — guarda las páginas web que abriste dentro
-  de VS Code con el Simple Browser integrado.
+- ⏪ **Restore button** — if VS Code closes unexpectedly, you'll see a prompt next time you open the project. One click and everything is back.
 
-![Páginas de referencia](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/4-puente-web.png)
+![Restore button](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/2-restaurar.png)
 
-- 🗣️ **Audio Briefing** — un resumen hablado de en qué te quedaste, leído
-  en voz alta con la voz de tu Mac (solo macOS por ahora).
+- 🟠 **Mental Beacon** — on restore, your editor jumps straight to the last line you edited and paints a soft heatmap over the lines where you worked the most.
 
-![Audio Briefing](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/5-resumen-voz.png)
+![Mental Beacon](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/3-faro-mental.png)
 
-- 🌍 **Español e inglés** — se adapta automáticamente al idioma que tengas
-  configurado en VS Code.
+- 🌐 **Reference pages** — remembers the web pages you opened inside VS Code with the built-in Simple Browser, and reopens them.
 
-## 🚀 Cómo usarla
+![Reference pages](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/4-puente-web.png)
 
-1. Trabaja normal — no necesitas hacer nada especial.
-2. Si VS Code se cierra de golpe (o lo cierras tú), la próxima vez que
-   abras el proyecto aparecerá un aviso: **"Encontré tu sesión anterior"**.
-3. Dale a **Restaurar** y todo vuelve a como estaba: pestañas, cursor,
-   línea exacta y mapa de calor.
+- 🗣️ **Audio briefing** — a short spoken summary of where you left off, read aloud with your Mac's voice (macOS only for now).
 
-## ⚙️ Configuración
+![Audio briefing](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/5-resumen-voz.png)
 
-| Opción | Qué hace | Por defecto |
+- 🌍 **English and Spanish** — follows the language you use in VS Code.
+
+## 🚀 How to use it
+
+1. Just work as usual — there's nothing to set up.
+2. If VS Code closes suddenly (or you close it), the next time you open the project you'll see: **"Found your previous session"**.
+3. Click **Restore**: tabs, cursor, exact line and heatmap come back.
+
+## 🔒 Privacy
+
+- No servers, no accounts, no telemetry. The extension never sends your data anywhere.
+- Your session is stored in VS Code's own extension storage on your computer.
+- If you use VS Code **Settings Sync**, your saved session can also sync between your own devices through your Settings Sync account.
+
+## ⚙️ Settings
+
+| Setting | What it does | Default |
 |---|---|---|
-| `lecnar.autosaveDelaySeconds` | Segundos de espera tras un cambio antes de guardar | `2` |
-| `lecnar.beaconDurationSeconds` | Segundos que dura encendido el Faro Mental | `8` |
-| `lecnar.enableVoiceBriefing` | Activa o desactiva el resumen hablado (macOS) | `true` |
+| `lecnar.autosaveDelaySeconds` | Seconds to wait after a change before saving | `2` |
+| `lecnar.beaconDurationSeconds` | Seconds the Mental Beacon stays on | `8` |
+| `lecnar.enableVoiceBriefing` | Turns the spoken summary on or off (macOS) | `true` |
 
-## 📋 Comandos
+## 📋 Commands
 
-- **Lecnar: Guardar sesión ahora**
-- **Lecnar: Restaurar sesión (Faro Mental)**
-- **Lecnar: Descartar sesión guardada**
-- **Lecnar: Agregar página web al contexto**
+- **Lecnar: Save session now**
+- **Lecnar: Restore session (Mental Beacon)**
+- **Lecnar: Discard saved session**
+- **Lecnar: Add web page to context**
 
-## ☕ Apoya el proyecto
+## ⭐ Like it?
 
-Lecnar Memory Sync es gratis. Si te ahorra tiempo, puedes invitarme un café
-en **[ko-fi.com/lecnar](https://ko-fi.com/lecnar)** — me ayuda a seguir mejorándola.
+If Lecnar Memory Sync saved you time, a **rating on the Marketplace** helps other developers find it — and it means a lot to me as a first-time extension author.
+
+Found a bug or have an idea? [Open an issue on GitHub](https://github.com/lecnar7/lecnar-memory-sync/issues).
+
+## ☕ Support
+
+Lecnar Memory Sync is free. If you'd like to support it, you can buy me a coffee at **[ko-fi.com/lecnar](https://ko-fi.com/lecnar)**.
 
 ---
 
-*Creada por Lecnar · [Código en GitHub](https://github.com/lecnar7/lecnar-memory-sync) · [Video en YouTube](https://youtu.be/QVZ9QrwTms0)*
+*Made by Lecnar · [Source on GitHub](https://github.com/lecnar7/lecnar-memory-sync) · [Video on YouTube](https://youtu.be/QVZ9QrwTms0)*
