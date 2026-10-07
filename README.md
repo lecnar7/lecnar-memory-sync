@@ -8,9 +8,7 @@
 
 It saves your session automatically in the background. After a crash, a power outage or just a long break, you get a **Restore** button — like "Restore pages" in your browser.
 
-<!-- TODO: add the GIF here (crash → reopen → Restore → Mental Beacon), e.g.:
 ![Lecnar Memory Sync demo](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/demo.gif)
--->
 
 [![Watch the Lecnar Memory Sync video](https://raw.githubusercontent.com/lecnar7/lecnar-memory-sync/main/images/portada-video.jpg)](https://youtu.be/QVZ9QrwTms0)
 
